@@ -1,4 +1,3 @@
-
 import { User, BellRing, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -20,7 +19,7 @@ export const Navbar = () => {
               <Sidebar />
             </SheetContent>
           </Sheet>
-          <Link to="/" className="font-bold text-primary text-lg">MyResponder</Link>
+          <Link to="/" className="font-bold text-primary text-lg">RRR</Link>
         </div>
         <div className="flex items-center gap-2">
           <Button variant="ghost" size="icon">

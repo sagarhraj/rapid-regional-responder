@@ -1,4 +1,3 @@
-
 import { Home, Heart, MapPin, History, Settings, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -15,7 +14,7 @@ export const Sidebar = () => {
   return (
     <div className="h-full bg-sidebar pt-4">
       <div className="px-4 py-2">
-        <h2 className="text-primary font-bold text-xl mb-6">MyResponder</h2>
+        <h2 className="text-primary font-bold text-xl mb-6">RRR</h2>
         <div className="space-y-2">
           {menuItems.map((item) => (
             <Link key={item.path} to={item.path}>

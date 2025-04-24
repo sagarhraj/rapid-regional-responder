@@ -13,7 +13,7 @@ export const HomePage = () => {
   return (
     <PageContainer className="space-y-6">
       <div className="text-center mt-2">
-        <h1 className="text-2xl font-bold">Welcome to MyResponder</h1>
+        <h1 className="text-2xl font-bold">Welcome to Rapid Regional Responder</h1>
         <p className="text-muted-foreground">Help save lives in your community</p>
       </div>
       
