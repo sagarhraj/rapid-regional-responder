@@ -7,7 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-const Index = () => {
+export const HomePage = () => {
   const [volunteerStatus, setVolunteerStatus] = useState<"active" | "inactive">("inactive");
   
   return (
@@ -136,4 +136,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default HomePage;
