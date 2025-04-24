@@ -1,4 +1,3 @@
-
 import { PageContainer } from "@/components/layout/PageContainer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -13,7 +12,7 @@ export const HistoryPage = () => {
       subType: "Cardiac Arrest",
       date: "May 10, 2023",
       time: "14:32",
-      location: "Orchard Road, Singapore",
+      location: "KTJ Nagar, Davangere",
       status: "Responded"
     },
     { 
@@ -22,7 +21,7 @@ export const HistoryPage = () => {
       subType: "Trauma/Injury",
       date: "April 22, 2023",
       time: "09:15",
-      location: "Tampines Hub, Singapore",
+      location: "P.J. Extension, Davangere",
       status: "Responded"
     },
     { 
@@ -31,7 +30,7 @@ export const HistoryPage = () => {
       subType: "Building Fire",
       date: "March 5, 2023",
       time: "18:45",
-      location: "Bishan Street 22, Singapore",
+      location: "Vinayaka Circle, Davangere",
       status: "Responded"
     },
   ];
@@ -43,7 +42,7 @@ export const HistoryPage = () => {
       subType: "Unconscious Person",
       date: "February 15, 2023",
       time: "21:20",
-      location: "Jurong East MRT, Singapore",
+      location: "MCC B Block, Davangere",
       status: "Resolved"
     },
     { 
@@ -52,7 +51,7 @@ export const HistoryPage = () => {
       subType: "Trapped Person",
       date: "January 3, 2023",
       time: "16:05",
-      location: "Sengkang West Road, Singapore",
+      location: "Bharath Nagar, Davangere",
       status: "Resolved"
     },
   ];
