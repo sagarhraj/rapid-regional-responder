@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { MapPin, Navigation, AlertCircle, Search } from "lucide-react";
 import { PageContainer } from "@/components/layout/PageContainer";
@@ -111,9 +110,8 @@ export const NearbyPage = () => {
           ))}
         </div>
       ) : (
-        <div className="bg-gray-100 rounded-lg border h-[400px] flex items-center justify-center">
-          <p className="text-muted-foreground">Map view would be displayed here</p>
-          {/* In a real implementation, this would be a map component */}
+        <div className="rounded-lg border">
+          <Map />
         </div>
       )}
     </PageContainer>
