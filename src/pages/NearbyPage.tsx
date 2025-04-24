@@ -6,14 +6,15 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
+import { Map } from "@/components/Map";
 
 const mockCases = [
   { 
     id: 1, 
     type: "Medical", 
     subType: "Cardiac Arrest", 
-    location: "Block 123, Ang Mo Kio Ave 6", 
-    distance: "0.8 km", 
+    location: "Block 45, Sector 18, Noida", 
+    distance: "1.2 km", 
     time: "2 mins ago",
     respondersNeeded: true
   },
@@ -21,8 +22,8 @@ const mockCases = [
     id: 2, 
     type: "Medical", 
     subType: "Unconscious Person", 
-    location: "Bishan MRT Station", 
-    distance: "1.2 km", 
+    location: "Connaught Place Metro Station, New Delhi", 
+    distance: "2.5 km", 
     time: "5 mins ago",
     respondersNeeded: true
   },
@@ -30,8 +31,8 @@ const mockCases = [
     id: 3, 
     type: "Fire", 
     subType: "Small Fire", 
-    location: "Food Court at Toa Payoh Hub", 
-    distance: "2.5 km", 
+    location: "DLF Mall, Sector 38, Gurgaon", 
+    distance: "3.8 km", 
     time: "10 mins ago",
     respondersNeeded: false
   },
