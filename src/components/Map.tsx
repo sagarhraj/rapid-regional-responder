@@ -1,6 +1,6 @@
 
-import { useState, useCallback } from 'react';
-import { GoogleMap, useLoadScript } from '@react-google-maps/api';
+import { useState, useCallback, useEffect } from 'react';
+import { GoogleMap, useLoadScript, MarkerF } from '@react-google-maps/api';
 
 const mapContainerStyle = {
   width: '100%',
@@ -8,9 +8,10 @@ const mapContainerStyle = {
   borderRadius: '0.5rem',
 };
 
-const center = {
-  lat: 20.5937, // India's central latitude
-  lng: 78.9629, // India's central longitude
+// Default center (New Delhi)
+const defaultCenter = {
+  lat: 28.6139,
+  lng: 77.2090,
 };
 
 const options = {
@@ -18,12 +19,47 @@ const options = {
   zoomControl: true,
 };
 
-export const Map = () => {
+interface MapProps {
+  cases?: Array<{
+    id: number;
+    type: string;
+    subType: string;
+    location: string;
+    lat: number;
+    lng: number;
+  }>;
+}
+
+export const Map = ({ cases = [] }: MapProps) => {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: 'AIzaSyAEMZX4tuajA-XGo6nny6dyM175SpTK3-k',
   });
   
+  const [userLocation, setUserLocation] = useState<google.maps.LatLngLiteral | null>(null);
   const [map, setMap] = useState<google.maps.Map | null>(null);
+
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const location = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
+          setUserLocation(location);
+          
+          // If map is loaded, center it on user location
+          if (map) {
+            map.panTo(location);
+            map.setZoom(13);
+          }
+        },
+        (error) => {
+          console.error('Error getting location:', error);
+        }
+      );
+    }
+  }, [map]);
 
   const onLoad = useCallback((map: google.maps.Map) => {
     setMap(map);
@@ -35,11 +71,40 @@ export const Map = () => {
   return (
     <GoogleMap
       mapContainerStyle={mapContainerStyle}
-      zoom={5}  // Adjusted zoom level to show more of India
-      center={center}
+      zoom={13}
+      center={userLocation || defaultCenter}
       options={options}
       onLoad={onLoad}
     >
+      {userLocation && (
+        <MarkerF
+          position={userLocation}
+          icon={{
+            path: google.maps.SymbolPath.CIRCLE,
+            scale: 7,
+            fillColor: "#4F46E5",
+            fillOpacity: 1,
+            strokeWeight: 2,
+            strokeColor: "#ffffff",
+          }}
+          title="You are here"
+        />
+      )}
+      {cases.map((caseItem) => (
+        <MarkerF
+          key={caseItem.id}
+          position={{ lat: caseItem.lat, lng: caseItem.lng }}
+          icon={{
+            path: google.maps.SymbolPath.CIRCLE,
+            scale: 7,
+            fillColor: caseItem.type === "Medical" ? "#EF4444" : "#F97316",
+            fillOpacity: 1,
+            strokeWeight: 2,
+            strokeColor: "#ffffff",
+          }}
+          title={caseItem.subType}
+        />
+      ))}
     </GoogleMap>
   );
 };

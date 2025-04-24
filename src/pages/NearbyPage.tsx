@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { MapPin, Navigation, AlertCircle, Search } from "lucide-react";
 import { PageContainer } from "@/components/layout/PageContainer";
@@ -15,7 +16,9 @@ const mockCases = [
     location: "Block 45, Sector 18, Noida", 
     distance: "1.2 km", 
     time: "2 mins ago",
-    respondersNeeded: true
+    respondersNeeded: true,
+    lat: 28.5697,
+    lng: 77.3183
   },
   { 
     id: 2, 
@@ -24,7 +27,9 @@ const mockCases = [
     location: "Connaught Place Metro Station, New Delhi", 
     distance: "2.5 km", 
     time: "5 mins ago",
-    respondersNeeded: true
+    respondersNeeded: true,
+    lat: 28.6289,
+    lng: 77.2065
   },
   { 
     id: 3, 
@@ -33,7 +38,9 @@ const mockCases = [
     location: "DLF Mall, Sector 38, Gurgaon", 
     distance: "3.8 km", 
     time: "10 mins ago",
-    respondersNeeded: false
+    respondersNeeded: false,
+    lat: 28.4595,
+    lng: 77.0266
   },
 ];
 
@@ -111,7 +118,7 @@ export const NearbyPage = () => {
         </div>
       ) : (
         <div className="rounded-lg border">
-          <Map />
+          <Map cases={mockCases} />
         </div>
       )}
     </PageContainer>
