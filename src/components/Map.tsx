@@ -9,8 +9,8 @@ const mapContainerStyle = {
 };
 
 const center = {
-  lat: 1.3521, // Singapore's latitude
-  lng: 103.8198, // Singapore's longitude
+  lat: 20.5937, // India's central latitude
+  lng: 78.9629, // India's central longitude
 };
 
 const options = {
@@ -35,7 +35,7 @@ export const Map = () => {
   return (
     <GoogleMap
       mapContainerStyle={mapContainerStyle}
-      zoom={11}
+      zoom={5}  // Adjusted zoom level to show more of India
       center={center}
       options={options}
       onLoad={onLoad}

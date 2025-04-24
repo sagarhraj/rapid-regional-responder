@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { PageContainer } from "@/components/layout/PageContainer";
 import { Button } from "@/components/ui/button";
@@ -23,10 +22,10 @@ export const ProfilePage = () => {
       
       <div className="flex items-center space-x-4 mb-6">
         <div className="h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center">
-          <span className="text-xl font-bold text-primary">TS</span>
+          <span className="text-xl font-bold text-primary">RK</span>
         </div>
         <div>
-          <h2 className="font-bold">Tan Seng</h2>
+          <h2 className="font-bold">Raj Kumar</h2>
           <div className="flex items-center text-sm text-muted-foreground">
             <BadgeCheck className="h-4 w-4 text-blue-500 mr-1" />
             <span>Verified Volunteer</span>
@@ -49,19 +48,19 @@ export const ProfilePage = () => {
             <CardContent className="space-y-3">
               <div>
                 <p className="text-sm text-muted-foreground">Full Name</p>
-                <p>Tan Seng</p>
+                <p>Raj Kumar</p>
               </div>
               <div>
                 <p className="text-sm text-muted-foreground">Contact Number</p>
-                <p>+65 9123 4567</p>
+                <p>+91 98765 43210</p>
               </div>
               <div>
                 <p className="text-sm text-muted-foreground">Email</p>
-                <p>tanseng@example.com</p>
+                <p>rajkumar@example.com</p>
               </div>
               <div>
                 <p className="text-sm text-muted-foreground">Address</p>
-                <p>Block 123, Tampines Street 45, #10-123, Singapore 520123</p>
+                <p>123, Sector 15, New Delhi, Delhi 110001, India</p>
               </div>
             </CardContent>
           </Card>
