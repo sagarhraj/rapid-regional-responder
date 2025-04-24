@@ -1,3 +1,4 @@
+
 import { useState, useCallback, useEffect } from 'react';
 import { GoogleMap, useLoadScript, MarkerF } from '@react-google-maps/api';
 
@@ -31,7 +32,7 @@ interface MapProps {
 
 export const Map = ({ cases = [] }: MapProps) => {
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: 'AIzaSyAEMZX4tuajA-XGo6nny6dyM175SpTK3-k',
+    googleMapsApiKey: '',  // Removed API key
   });
   
   const [userLocation, setUserLocation] = useState<google.maps.LatLngLiteral | null>(null);
@@ -63,7 +64,7 @@ export const Map = ({ cases = [] }: MapProps) => {
     setMap(map);
   }, []);
 
-  if (loadError) return <div className="text-red-500">Error loading maps</div>;
+  if (loadError) return <div className="text-red-500">Please configure a valid Google Maps API key</div>;
   if (!isLoaded) return <div className="text-muted-foreground">Loading maps...</div>;
 
   return (
