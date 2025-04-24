@@ -60,7 +60,7 @@ export const ProfilePage = () => {
               </div>
               <div>
                 <p className="text-sm text-muted-foreground">Address</p>
-                <p>123, Sector 15, New Delhi, Delhi 110001, India</p>
+                <p>55, Bharath Nagar, Near Vinayaka Circle, Davangere - 577004, Karnataka, India</p>
               </div>
             </CardContent>
           </Card>
