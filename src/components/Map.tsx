@@ -1,4 +1,3 @@
-
 import { useState, useCallback, useEffect } from 'react';
 import { GoogleMap, useLoadScript, MarkerF } from '@react-google-maps/api';
 
@@ -8,10 +7,10 @@ const mapContainerStyle = {
   borderRadius: '0.5rem',
 };
 
-// Default center (New Delhi)
+// Default center (Davangere, Karnataka)
 const defaultCenter = {
-  lat: 28.6139,
-  lng: 77.2090,
+  lat: 14.4644,
+  lng: 75.9218,
 };
 
 const options = {
@@ -48,7 +47,6 @@ export const Map = ({ cases = [] }: MapProps) => {
           };
           setUserLocation(location);
           
-          // If map is loaded, center it on user location
           if (map) {
             map.panTo(location);
             map.setZoom(13);

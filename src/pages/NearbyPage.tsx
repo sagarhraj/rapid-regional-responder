@@ -13,34 +13,34 @@ const mockCases = [
     id: 1, 
     type: "Medical", 
     subType: "Cardiac Arrest", 
-    location: "Block 45, Sector 18, Noida", 
+    location: "P.J. Extension, Davangere", 
     distance: "1.2 km", 
     time: "2 mins ago",
     respondersNeeded: true,
-    lat: 28.5697,
-    lng: 77.3183
+    lat: 14.4692,
+    lng: 75.9244
   },
   { 
     id: 2, 
     type: "Medical", 
     subType: "Unconscious Person", 
-    location: "Connaught Place Metro Station, New Delhi", 
+    location: "MCC 'B' Block, Davangere", 
     distance: "2.5 km", 
     time: "5 mins ago",
     respondersNeeded: true,
-    lat: 28.6289,
-    lng: 77.2065
+    lat: 14.4559,
+    lng: 75.9198
   },
   { 
     id: 3, 
     type: "Fire", 
     subType: "Small Fire", 
-    location: "DLF Mall, Sector 38, Gurgaon", 
+    location: "Vinayaka Circle, Davangere", 
     distance: "3.8 km", 
     time: "10 mins ago",
     respondersNeeded: false,
-    lat: 28.4595,
-    lng: 77.0266
+    lat: 14.4701,
+    lng: 75.9137
   },
 ];
 
