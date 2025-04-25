@@ -60,24 +60,25 @@ const AuthPage = () => {
 
       if (error) throw error;
 
-      // Update the user's profile
       if (user) {
-        const { error: profileError } = await supabase
+        // Update the user's profile with first and last name
+        const { error: updateError } = await supabase
           .from('profiles')
-          .update({ 
+          .upsert({ 
+            id: user.id,
             first_name: firstName,
             last_name: lastName,
             updated_at: new Date().toISOString()
-          })
-          .eq('id', user.id);
+          });
 
-        if (profileError) throw profileError;
+        if (updateError) throw updateError;
+
+        toast({
+          title: "Success",
+          description: `Welcome, ${firstName}!`,
+        });
       }
 
-      toast({
-        title: "Success",
-        description: "Successfully logged in!",
-      });
       navigate("/");
     } catch (error: any) {
       toast({
@@ -98,7 +99,7 @@ const AuthPage = () => {
             Welcome to RRR
           </h2>
           <p className="mt-2 text-sm text-muted-foreground">
-            Enter your phone number to get started
+            {!showOTP ? "Enter your phone number to get started" : "Please verify your phone number"}
           </p>
         </div>
 
@@ -137,7 +138,7 @@ const AuthPage = () => {
                   onChange={setOtp}
                   render={({ slots }) => (
                     <InputOTPGroup>
-                      {slots.map((slot, i) => (
+                      {slots.map((_, i) => (
                         <InputOTPSlot key={i} index={i} />
                       ))}
                     </InputOTPGroup>
