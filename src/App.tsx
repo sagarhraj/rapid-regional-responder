@@ -24,18 +24,20 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/nearby" element={<NearbyPage />} />
-          <Route path="/report" element={<ReportPage />} />
-          <Route path="/history" element={<HistoryPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/settings" element={<ProfilePage />} />
-          <Route path="/tokens" element={<TokenWalletPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-        <BottomNav />
+        <div className="min-h-screen pb-16 md:pb-0">
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/nearby" element={<NearbyPage />} />
+            <Route path="/report" element={<ReportPage />} />
+            <Route path="/history" element={<HistoryPage />} />
+            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/settings" element={<ProfilePage />} />
+            <Route path="/tokens" element={<TokenWalletPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+          <BottomNav />
+        </div>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
