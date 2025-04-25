@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import HomePage from "@/pages/HomePage";
 import NearbyPage from "@/pages/NearbyPage";
@@ -28,24 +28,90 @@ const App = () => (
         <Routes>
           <Route path="/auth" element={<AuthPage />} />
           <Route
+            path="/"
             element={
               <AuthGuard>
                 <div className="min-h-screen pb-16 md:pb-0">
                   <Navbar />
-                  <Routes>
-                    <Route path="/" element={<HomePage />} />
-                    <Route path="/nearby" element={<NearbyPage />} />
-                    <Route path="/report" element={<ReportPage />} />
-                    <Route path="/history" element={<HistoryPage />} />
-                    <Route path="/profile" element={<ProfilePage />} />
-                    <Route path="/settings" element={<ProfilePage />} />
-                    <Route path="*" element={<NotFoundPage />} />
-                  </Routes>
+                  <div className="pt-16">
+                    <HomePage />
+                  </div>
                   <BottomNav />
                 </div>
               </AuthGuard>
             }
           />
+          <Route
+            path="/nearby"
+            element={
+              <AuthGuard>
+                <div className="min-h-screen pb-16 md:pb-0">
+                  <Navbar />
+                  <div className="pt-16">
+                    <NearbyPage />
+                  </div>
+                  <BottomNav />
+                </div>
+              </AuthGuard>
+            }
+          />
+          <Route
+            path="/report"
+            element={
+              <AuthGuard>
+                <div className="min-h-screen pb-16 md:pb-0">
+                  <Navbar />
+                  <div className="pt-16">
+                    <ReportPage />
+                  </div>
+                  <BottomNav />
+                </div>
+              </AuthGuard>
+            }
+          />
+          <Route
+            path="/history"
+            element={
+              <AuthGuard>
+                <div className="min-h-screen pb-16 md:pb-0">
+                  <Navbar />
+                  <div className="pt-16">
+                    <HistoryPage />
+                  </div>
+                  <BottomNav />
+                </div>
+              </AuthGuard>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <AuthGuard>
+                <div className="min-h-screen pb-16 md:pb-0">
+                  <Navbar />
+                  <div className="pt-16">
+                    <ProfilePage />
+                  </div>
+                  <BottomNav />
+                </div>
+              </AuthGuard>
+            }
+          />
+          <Route
+            path="/settings"
+            element={
+              <AuthGuard>
+                <div className="min-h-screen pb-16 md:pb-0">
+                  <Navbar />
+                  <div className="pt-16">
+                    <ProfilePage />
+                  </div>
+                  <BottomNav />
+                </div>
+              </AuthGuard>
+            }
+          />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>

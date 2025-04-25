@@ -10,16 +10,16 @@ export const AuthGuard = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
 
   useEffect(() => {
-    // Get initial session
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    // Set up auth state listener first
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      console.log("Auth state changed:", session ? "logged in" : "logged out");
       setSession(session);
       setLoading(false);
     });
 
-    // Listen for auth changes
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
+    // Then check for existing session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      console.log("Initial session check:", session ? "found session" : "no session");
       setSession(session);
       setLoading(false);
     });
@@ -27,13 +27,21 @@ export const AuthGuard = ({ children }: { children: React.ReactNode }) => {
     return () => subscription.unsubscribe();
   }, []);
 
+  // Show a loading indicator while checking authentication
   if (loading) {
-    return null;
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="animate-spin h-10 w-10 border-4 border-primary rounded-full border-t-transparent"></div>
+      </div>
+    );
   }
 
   if (!session) {
+    console.log("No session found, redirecting to auth page");
+    // Save the current location to redirect back after login
     return <Navigate to="/auth" state={{ from: location }} replace />;
   }
 
+  console.log("Session found, showing protected content");
   return <>{children}</>;
 };
