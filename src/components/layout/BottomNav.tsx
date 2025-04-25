@@ -1,6 +1,6 @@
 
 import { useLocation, Link } from "react-router-dom";
-import { Home, MapPin, AlertCircle, Clock, User, Coins } from "lucide-react";
+import { Home, MapPin, AlertCircle, Clock3, User, Coins } from "lucide-react";
 
 export const BottomNav = () => {
   const { pathname } = useLocation();
@@ -24,7 +24,7 @@ export const BottomNav = () => {
     {
       href: "/history",
       label: "History",
-      icon: <Clock className="h-5 w-5" />
+      icon: <Clock3 className="h-5 w-5" />
     },
     {
       href: "/tokens",
