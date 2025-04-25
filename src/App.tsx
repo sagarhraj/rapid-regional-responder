@@ -11,9 +11,11 @@ import ReportPage from "@/pages/ReportPage";
 import HistoryPage from "@/pages/HistoryPage";
 import ProfilePage from "@/pages/ProfilePage";
 import NotFoundPage from "@/pages/NotFoundPage";
+import AuthPage from "@/pages/AuthPage";
 
 import { Navbar } from "@/components/layout/Navbar";
 import { BottomNav } from "@/components/layout/BottomNav";
+import { AuthGuard } from "@/components/auth/AuthGuard";
 
 const queryClient = new QueryClient();
 
@@ -23,19 +25,28 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <div className="min-h-screen pb-16 md:pb-0">
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/nearby" element={<NearbyPage />} />
-            <Route path="/report" element={<ReportPage />} />
-            <Route path="/history" element={<HistoryPage />} />
-            <Route path="/profile" element={<ProfilePage />} />
-            <Route path="/settings" element={<ProfilePage />} />
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
-          <BottomNav />
-        </div>
+        <Routes>
+          <Route path="/auth" element={<AuthPage />} />
+          <Route
+            element={
+              <AuthGuard>
+                <div className="min-h-screen pb-16 md:pb-0">
+                  <Navbar />
+                  <Routes>
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="/nearby" element={<NearbyPage />} />
+                    <Route path="/report" element={<ReportPage />} />
+                    <Route path="/history" element={<HistoryPage />} />
+                    <Route path="/profile" element={<ProfilePage />} />
+                    <Route path="/settings" element={<ProfilePage />} />
+                    <Route path="*" element={<NotFoundPage />} />
+                  </Routes>
+                  <BottomNav />
+                </div>
+              </AuthGuard>
+            }
+          />
+        </Routes>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
