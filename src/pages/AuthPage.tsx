@@ -1,17 +1,20 @@
 
 import { useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
+import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form";
 import { Phone } from "lucide-react";
 
 const AuthPage = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [otp, setOtp] = useState("");
   const [showOTP, setShowOTP] = useState(false);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
@@ -49,13 +52,27 @@ const AuthPage = () => {
     setLoading(true);
 
     try {
-      const { error } = await supabase.auth.verifyOtp({
+      const { data: { user }, error } = await supabase.auth.verifyOtp({
         phone: phoneNumber.startsWith('+') ? phoneNumber : `+${phoneNumber}`,
         token: otp,
         type: "sms",
       });
 
       if (error) throw error;
+
+      // Update the user's profile
+      if (user) {
+        const { error: profileError } = await supabase
+          .from('profiles')
+          .update({ 
+            first_name: firstName,
+            last_name: lastName,
+            updated_at: new Date().toISOString()
+          })
+          .eq('id', user.id);
+
+        if (profileError) throw profileError;
+      }
 
       toast({
         title: "Success",
@@ -111,24 +128,52 @@ const AuthPage = () => {
           </form>
         ) : (
           <form onSubmit={verifyOTP} className="mt-8 space-y-6">
-            <div className="space-y-2">
-              <label className="text-sm font-medium">Enter verification code</label>
-              <InputOTP
-                maxLength={6}
-                value={otp}
-                onChange={setOtp}
-              >
-                <InputOTPGroup>
-                  {Array.from({ length: 6 }).map((_, index) => (
-                    <InputOTPSlot key={index} index={index} />
-                  ))}
-                </InputOTPGroup>
-              </InputOTP>
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Enter verification code</label>
+                <InputOTP
+                  maxLength={6}
+                  value={otp}
+                  onChange={setOtp}
+                  render={({ slots }) => (
+                    <InputOTPGroup>
+                      {slots.map((slot, index) => (
+                        <InputOTPSlot key={index} {...slot} />
+                      ))}
+                    </InputOTPGroup>
+                  )}
+                />
+              </div>
+
+              <FormItem>
+                <FormLabel>First Name</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Enter your first name"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    required
+                  />
+                </FormControl>
+              </FormItem>
+
+              <FormItem>
+                <FormLabel>Last Name</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Enter your last name"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                    required
+                  />
+                </FormControl>
+              </FormItem>
             </div>
+
             <Button
               type="submit"
               className="w-full"
-              disabled={loading || otp.length !== 6}
+              disabled={loading || otp.length !== 6 || !firstName || !lastName}
             >
               {loading ? "Verifying..." : "Verify Code"}
             </Button>
