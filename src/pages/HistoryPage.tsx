@@ -1,4 +1,3 @@
-
 import { PageContainer } from "@/components/layout/PageContainer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -108,7 +107,7 @@ export const HistoryPage = () => {
         <TabsContent value="responses" className="space-y-4">
           {responseHistory.length === 0 ? (
             <div className="text-center p-8 bg-secondary/30 rounded-lg">
-              <Clock className="h-12 w-12 text-muted-foreground mx-auto mb-3" />
+              <Clock3 className="h-12 w-12 text-muted-foreground mx-auto mb-3" />
               <p className="text-muted-foreground">You haven't responded to any emergencies yet.</p>
             </div>
           ) : (
@@ -170,7 +169,7 @@ export const HistoryPage = () => {
         <TabsContent value="reports" className="space-y-4">
           {reportHistory.length === 0 ? (
             <div className="text-center p-8 bg-secondary/30 rounded-lg">
-              <Clock className="h-12 w-12 text-muted-foreground mx-auto mb-3" />
+              <Clock3 className="h-12 w-12 text-muted-foreground mx-auto mb-3" />
               <p className="text-muted-foreground">You haven't reported any emergencies yet.</p>
             </div>
           ) : (
