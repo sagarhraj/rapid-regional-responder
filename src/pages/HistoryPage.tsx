@@ -1,8 +1,9 @@
+
 import { PageContainer } from "@/components/layout/PageContainer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
-import { AlertCircle, CheckCircle, Clock } from "lucide-react";
+import { AlertCircle, CheckCircle, Clock, MapPin, Calendar, Clock3 } from "lucide-react";
 
 export const HistoryPage = () => {
   const responseHistory = [
@@ -58,45 +59,73 @@ export const HistoryPage = () => {
   
   return (
     <PageContainer>
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold">History</h1>
-        <p className="text-muted-foreground">Your emergency response activities</p>
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
+          History
+        </h1>
+        <p className="text-muted-foreground text-lg mt-1">Your emergency response activities</p>
       </div>
       
-      <Tabs defaultValue="responses">
-        <TabsList className="grid grid-cols-2 mb-4">
-          <TabsTrigger value="responses">My Responses</TabsTrigger>
-          <TabsTrigger value="reports">My Reports</TabsTrigger>
+      <Tabs defaultValue="responses" className="w-full">
+        <TabsList className="grid grid-cols-2 w-full mb-6 p-1 bg-secondary/50">
+          <TabsTrigger 
+            value="responses" 
+            className="text-base py-3 data-[state=active]:bg-white data-[state=active]:text-primary data-[state=active]:shadow-md transition-all"
+          >
+            My Responses
+          </TabsTrigger>
+          <TabsTrigger 
+            value="reports"
+            className="text-base py-3 data-[state=active]:bg-white data-[state=active]:text-primary data-[state=active]:shadow-md transition-all"
+          >
+            My Reports
+          </TabsTrigger>
         </TabsList>
         
         <TabsContent value="responses" className="space-y-4">
           {responseHistory.length === 0 ? (
-            <div className="text-center p-6">
+            <div className="text-center p-8 bg-secondary/30 rounded-lg">
               <Clock className="h-12 w-12 text-muted-foreground mx-auto mb-3" />
               <p className="text-muted-foreground">You haven't responded to any emergencies yet.</p>
             </div>
           ) : (
             responseHistory.map((item) => (
-              <Card key={item.id}>
-                <CardContent className="p-4">
-                  <div className="flex justify-between items-start mb-2">
+              <Card key={item.id} className="overflow-hidden hover:shadow-lg transition-all">
+                <CardContent className="p-5">
+                  <div className="flex justify-between items-start mb-3">
                     <div className="flex items-center">
-                      <AlertCircle className={`h-5 w-5 mr-2 ${item.type === "Medical" ? "text-primary" : "text-orange-500"}`} />
-                      <span className="font-medium">{item.subType}</span>
+                      <div className={`p-2 rounded-full mr-3 ${
+                        item.type === "Medical" ? "bg-red-100" : "bg-orange-100"
+                      }`}>
+                        <AlertCircle className={`h-5 w-5 ${
+                          item.type === "Medical" ? "text-red-600" : "text-orange-600"
+                        }`} />
+                      </div>
+                      <div>
+                        <span className="text-sm text-muted-foreground">{item.type}</span>
+                        <h3 className="font-semibold text-lg -mt-1">{item.subType}</h3>
+                      </div>
                     </div>
-                    <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
-                      <CheckCircle className="h-3 w-3 mr-1" />
+                    <Badge variant="outline" className="bg-emerald-50 text-emerald-700 border-emerald-200 flex items-center gap-1">
+                      <CheckCircle className="h-3 w-3" />
                       {item.status}
                     </Badge>
                   </div>
                   
-                  <div className="text-sm text-muted-foreground mb-1">
-                    <span>{item.date}</span>
-                    <span className="mx-1">•</span>
-                    <span>{item.time}</span>
+                  <div className="flex flex-col space-y-2 text-sm">
+                    <div className="flex items-center text-muted-foreground">
+                      <Calendar className="h-4 w-4 mr-2" />
+                      <span>{item.date}</span>
+                      <span className="mx-2">•</span>
+                      <Clock3 className="h-4 w-4 mr-2" />
+                      <span>{item.time}</span>
+                    </div>
+                    
+                    <div className="flex items-center">
+                      <MapPin className="h-4 w-4 mr-2 text-primary" />
+                      <span>{item.location}</span>
+                    </div>
                   </div>
-                  
-                  <div className="text-sm">{item.location}</div>
                 </CardContent>
               </Card>
             ))
@@ -105,31 +134,47 @@ export const HistoryPage = () => {
         
         <TabsContent value="reports" className="space-y-4">
           {reportHistory.length === 0 ? (
-            <div className="text-center p-6">
+            <div className="text-center p-8 bg-secondary/30 rounded-lg">
               <Clock className="h-12 w-12 text-muted-foreground mx-auto mb-3" />
               <p className="text-muted-foreground">You haven't reported any emergencies yet.</p>
             </div>
           ) : (
             reportHistory.map((item) => (
-              <Card key={item.id}>
-                <CardContent className="p-4">
-                  <div className="flex justify-between items-start mb-2">
+              <Card key={item.id} className="overflow-hidden hover:shadow-lg transition-all">
+                <CardContent className="p-5">
+                  <div className="flex justify-between items-start mb-3">
                     <div className="flex items-center">
-                      <AlertCircle className={`h-5 w-5 mr-2 ${item.type === "Medical" ? "text-primary" : "text-orange-500"}`} />
-                      <span className="font-medium">{item.subType}</span>
+                      <div className={`p-2 rounded-full mr-3 ${
+                        item.type === "Medical" ? "bg-red-100" : "bg-blue-100"
+                      }`}>
+                        <AlertCircle className={`h-5 w-5 ${
+                          item.type === "Medical" ? "text-red-600" : "text-blue-600"
+                        }`} />
+                      </div>
+                      <div>
+                        <span className="text-sm text-muted-foreground">{item.type}</span>
+                        <h3 className="font-semibold text-lg -mt-1">{item.subType}</h3>
+                      </div>
                     </div>
                     <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">
                       {item.status}
                     </Badge>
                   </div>
                   
-                  <div className="text-sm text-muted-foreground mb-1">
-                    <span>{item.date}</span>
-                    <span className="mx-1">•</span>
-                    <span>{item.time}</span>
+                  <div className="flex flex-col space-y-2 text-sm">
+                    <div className="flex items-center text-muted-foreground">
+                      <Calendar className="h-4 w-4 mr-2" />
+                      <span>{item.date}</span>
+                      <span className="mx-2">•</span>
+                      <Clock3 className="h-4 w-4 mr-2" />
+                      <span>{item.time}</span>
+                    </div>
+                    
+                    <div className="flex items-center">
+                      <MapPin className="h-4 w-4 mr-2 text-primary" />
+                      <span>{item.location}</span>
+                    </div>
                   </div>
-                  
-                  <div className="text-sm">{item.location}</div>
                 </CardContent>
               </Card>
             ))
