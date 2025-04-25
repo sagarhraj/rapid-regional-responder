@@ -11,7 +11,6 @@ import ReportPage from "@/pages/ReportPage";
 import HistoryPage from "@/pages/HistoryPage";
 import ProfilePage from "@/pages/ProfilePage";
 import NotFoundPage from "@/pages/NotFoundPage";
-import TokenWalletPage from "@/pages/TokenWalletPage";
 
 import { Navbar } from "@/components/layout/Navbar";
 import { BottomNav } from "@/components/layout/BottomNav";
@@ -33,7 +32,6 @@ const App = () => (
             <Route path="/history" element={<HistoryPage />} />
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/settings" element={<ProfilePage />} />
-            <Route path="/tokens" element={<TokenWalletPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
           <BottomNav />
