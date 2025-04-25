@@ -99,7 +99,7 @@ const AuthPage = () => {
             Welcome to RRR
           </h2>
           <p className="mt-2 text-sm text-muted-foreground">
-            {!showOTP ? "Enter your phone number to get started" : "Please verify your phone number"}
+            {!showOTP ? "Enter your phone number to get started" : "Please verify your phone number and enter your name"}
           </p>
         </div>
 
@@ -146,29 +146,33 @@ const AuthPage = () => {
                 />
               </div>
 
-              <FormItem>
-                <FormLabel>First Name</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="Enter your first name"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                    required
-                  />
-                </FormControl>
-              </FormItem>
+              <div className="space-y-4 mt-6">
+                <h3 className="text-lg font-medium">Your Information</h3>
+                
+                <FormItem>
+                  <FormLabel>First Name</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Enter your first name"
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
+                      required
+                    />
+                  </FormControl>
+                </FormItem>
 
-              <FormItem>
-                <FormLabel>Last Name</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="Enter your last name"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                    required
-                  />
-                </FormControl>
-              </FormItem>
+                <FormItem>
+                  <FormLabel>Last Name</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Enter your last name"
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
+                      required
+                    />
+                  </FormControl>
+                </FormItem>
+              </div>
             </div>
 
             <Button
@@ -176,7 +180,7 @@ const AuthPage = () => {
               className="w-full"
               disabled={loading || otp.length !== 6 || !firstName || !lastName}
             >
-              {loading ? "Verifying..." : "Verify Code"}
+              {loading ? "Verifying..." : "Verify & Create Account"}
             </Button>
           </form>
         )}
