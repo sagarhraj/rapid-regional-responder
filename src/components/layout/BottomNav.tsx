@@ -1,39 +1,59 @@
 
-import { Home, MapPin, AlertCircle, History, User } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
-import { cn } from "@/lib/utils";
+import { useLocation, Link } from "react-router-dom";
+import { Home, MapPin, AlertCircle, Clock, User, Coins } from "lucide-react";
 
 export const BottomNav = () => {
-  const location = useLocation();
+  const { pathname } = useLocation();
   
-  const navItems = [
-    { icon: Home, label: "Home", path: "/" },
-    { icon: MapPin, label: "Nearby", path: "/nearby" },
-    { icon: AlertCircle, label: "Report", path: "/report" },
-    { icon: History, label: "History", path: "/history" },
-    { icon: User, label: "Profile", path: "/profile" },
+  const links = [
+    {
+      href: "/",
+      label: "Home",
+      icon: <Home className="h-5 w-5" />
+    },
+    {
+      href: "/nearby",
+      label: "Nearby",
+      icon: <MapPin className="h-5 w-5" />
+    },
+    {
+      href: "/report",
+      label: "Report",
+      icon: <AlertCircle className="h-5 w-5" />
+    },
+    {
+      href: "/history",
+      label: "History",
+      icon: <Clock className="h-5 w-5" />
+    },
+    {
+      href: "/tokens",
+      label: "Tokens",
+      icon: <Coins className="h-5 w-5" />
+    },
+    {
+      href: "/profile",
+      label: "Profile",
+      icon: <User className="h-5 w-5" />
+    }
   ];
-
+  
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-white border-t shadow-sm z-10">
-      <div className="flex items-center justify-around">
-        {navItems.map((item) => {
-          const isActive = location.pathname === item.path;
-          return (
-            <Link 
-              key={item.path}
-              to={item.path} 
-              className={cn(
-                "flex flex-col items-center py-2 px-4", 
-                isActive ? "text-primary" : "text-gray-500"
-              )}
-            >
-              <item.icon className="h-5 w-5" />
-              <span className="text-xs mt-1">{item.label}</span>
-            </Link>
-          );
-        })}
+    <nav className="fixed inset-x-0 bottom-0 z-50 h-16 border-t bg-background/80 backdrop-blur-lg md:hidden">
+      <div className="flex h-full items-center justify-around px-2">
+        {links.map(link => (
+          <Link
+            key={link.href}
+            to={link.href}
+            className={`flex h-full w-full flex-col items-center justify-center gap-1 text-xs ${
+              pathname === link.href ? "text-primary" : "text-muted-foreground"
+            }`}
+          >
+            {link.icon}
+            <span>{link.label}</span>
+          </Link>
+        ))}
       </div>
-    </div>
+    </nav>
   );
 };

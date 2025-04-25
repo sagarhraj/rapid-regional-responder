@@ -3,9 +3,13 @@ import { PageContainer } from "@/components/layout/PageContainer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
-import { AlertCircle, CheckCircle, Clock, MapPin, Calendar, Clock3 } from "lucide-react";
+import { AlertCircle, CheckCircle, Calendar, Clock3, MapPin, Coins } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 export const HistoryPage = () => {
+  const navigate = useNavigate();
+  
   const responseHistory = [
     { 
       id: 1,
@@ -14,7 +18,9 @@ export const HistoryPage = () => {
       date: "May 10, 2023",
       time: "14:32",
       location: "KTJ Nagar, Davangere",
-      status: "Responded"
+      status: "Responded",
+      tokens: 50,
+      tokenStatus: "Earned"
     },
     { 
       id: 2,
@@ -23,7 +29,9 @@ export const HistoryPage = () => {
       date: "April 22, 2023",
       time: "09:15",
       location: "P.J. Extension, Davangere",
-      status: "Responded"
+      status: "Responded",
+      tokens: 150,
+      tokenStatus: "Earned"
     },
     { 
       id: 3,
@@ -32,7 +40,9 @@ export const HistoryPage = () => {
       date: "March 5, 2023",
       time: "18:45",
       location: "Vinayaka Circle, Davangere",
-      status: "Responded"
+      status: "Responded",
+      tokens: 100,
+      tokenStatus: "Earned"
     },
   ];
   
@@ -44,7 +54,9 @@ export const HistoryPage = () => {
       date: "February 15, 2023",
       time: "21:20",
       location: "MCC B Block, Davangere",
-      status: "Resolved"
+      status: "Resolved",
+      tokens: 75,
+      tokenStatus: "Earned"
     },
     { 
       id: 2,
@@ -53,17 +65,28 @@ export const HistoryPage = () => {
       date: "January 3, 2023",
       time: "16:05",
       location: "Bharath Nagar, Davangere",
-      status: "Resolved"
+      status: "Resolved",
+      tokens: 60,
+      tokenStatus: "Earned"
     },
   ];
   
   return (
     <PageContainer>
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
-          History
-        </h1>
-        <p className="text-muted-foreground text-lg mt-1">Your emergency response activities</p>
+      <div className="mb-8 flex flex-col md:flex-row justify-between items-start md:items-center">
+        <div>
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
+            History
+          </h1>
+          <p className="text-muted-foreground text-lg mt-1">Your emergency response activities</p>
+        </div>
+        <Button 
+          className="mt-4 md:mt-0 bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 flex items-center gap-2"
+          onClick={() => navigate('/tokens')}
+        >
+          <Coins className="h-4 w-4" />
+          <span>View Token Wallet</span>
+        </Button>
       </div>
       
       <Tabs defaultValue="responses" className="w-full">
@@ -95,10 +118,14 @@ export const HistoryPage = () => {
                   <div className="flex justify-between items-start mb-3">
                     <div className="flex items-center">
                       <div className={`p-2 rounded-full mr-3 ${
-                        item.type === "Medical" ? "bg-red-100" : "bg-orange-100"
+                        item.type === "Medical" ? "bg-red-100" : 
+                        item.type === "Fire" ? "bg-orange-100" : 
+                        "bg-blue-100"
                       }`}>
                         <AlertCircle className={`h-5 w-5 ${
-                          item.type === "Medical" ? "text-red-600" : "text-orange-600"
+                          item.type === "Medical" ? "text-red-600" : 
+                          item.type === "Fire" ? "text-orange-600" : 
+                          "text-blue-600"
                         }`} />
                       </div>
                       <div>
@@ -124,6 +151,14 @@ export const HistoryPage = () => {
                     <div className="flex items-center">
                       <MapPin className="h-4 w-4 mr-2 text-primary" />
                       <span>{item.location}</span>
+                    </div>
+                    
+                    <div className="flex items-center mt-2 pt-2 border-t border-dashed border-amber-200">
+                      <Coins className="h-4 w-4 mr-2 text-amber-600" />
+                      <span className="font-medium text-amber-700">+{item.tokens} tokens</span>
+                      <Badge className="ml-2 bg-amber-100 text-amber-800 hover:bg-amber-200 border-amber-200">
+                        {item.tokenStatus}
+                      </Badge>
                     </div>
                   </div>
                 </CardContent>
@@ -173,6 +208,14 @@ export const HistoryPage = () => {
                     <div className="flex items-center">
                       <MapPin className="h-4 w-4 mr-2 text-primary" />
                       <span>{item.location}</span>
+                    </div>
+                    
+                    <div className="flex items-center mt-2 pt-2 border-t border-dashed border-amber-200">
+                      <Coins className="h-4 w-4 mr-2 text-amber-600" />
+                      <span className="font-medium text-amber-700">+{item.tokens} tokens</span>
+                      <Badge className="ml-2 bg-amber-100 text-amber-800 hover:bg-amber-200 border-amber-200">
+                        {item.tokenStatus}
+                      </Badge>
                     </div>
                   </div>
                 </CardContent>
