@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
-import { phone } from "lucide-react";
+import { Phone } from "lucide-react";
 
 const AuthPage = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -93,7 +93,7 @@ const AuthPage = () => {
                 placeholder="Phone number (e.g., +1234567890)"
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
-                startContent={<phone className="h-4 w-4 text-muted-foreground" />}
+                startContent={<Phone className="h-4 w-4 text-muted-foreground" />}
                 required
                 pattern="^\+?[1-9]\d{1,14}$"
               />
@@ -117,7 +117,7 @@ const AuthPage = () => {
                 render={({ slots }) => (
                   <InputOTPGroup className="gap-2">
                     {slots.map((slot, index) => (
-                      <InputOTPSlot key={index} {...slot} />
+                      <InputOTPSlot key={index} {...slot} index={index} />
                     ))}
                   </InputOTPGroup>
                 )}
