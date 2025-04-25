@@ -10,6 +10,8 @@ export const AuthGuard = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
 
   useEffect(() => {
+    console.log("AuthGuard: Setting up auth state listener");
+    
     // Set up auth state listener first
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       console.log("Auth state changed:", session ? "logged in" : "logged out");
@@ -24,7 +26,10 @@ export const AuthGuard = ({ children }: { children: React.ReactNode }) => {
       setLoading(false);
     });
 
-    return () => subscription.unsubscribe();
+    return () => {
+      console.log("AuthGuard: Cleaning up auth state listener");
+      subscription.unsubscribe();
+    };
   }, []);
 
   // Show a loading indicator while checking authentication

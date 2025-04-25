@@ -88,15 +88,18 @@ const AuthPage = () => {
         {!showOTP ? (
           <form onSubmit={handleSendOTP} className="mt-8 space-y-6">
             <div>
-              <Input
-                type="tel"
-                placeholder="Phone number (e.g., +1234567890)"
-                value={phoneNumber}
-                onChange={(e) => setPhoneNumber(e.target.value)}
-                startContent={<Phone className="h-4 w-4 text-muted-foreground" />}
-                required
-                pattern="^\+?[1-9]\d{1,14}$"
-              />
+              <div className="flex items-center border border-input rounded-md px-3">
+                <Phone className="h-4 w-4 text-muted-foreground mr-2" />
+                <Input
+                  type="tel"
+                  placeholder="Phone number (e.g., +1234567890)"
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  required
+                  pattern="^\+?[1-9]\d{1,14}$"
+                  className="border-0 focus-visible:ring-0 focus-visible:ring-offset-0"
+                />
+              </div>
             </div>
             <Button
               type="submit"
@@ -111,17 +114,16 @@ const AuthPage = () => {
             <div className="space-y-2">
               <label className="text-sm font-medium">Enter verification code</label>
               <InputOTP
+                maxLength={6}
                 value={otp}
                 onChange={setOtp}
-                maxLength={6}
-                render={({ slots }) => (
-                  <InputOTPGroup className="gap-2">
-                    {slots.map((slot, index) => (
-                      <InputOTPSlot key={index} {...slot} index={index} />
-                    ))}
-                  </InputOTPGroup>
-                )}
-              />
+              >
+                <InputOTPGroup>
+                  {Array.from({ length: 6 }).map((_, index) => (
+                    <InputOTPSlot key={index} index={index} />
+                  ))}
+                </InputOTPGroup>
+              </InputOTP>
             </div>
             <Button
               type="submit"
